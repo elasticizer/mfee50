@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-hant-TW">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta
+		name="viewport"
+		content="width=device-width, initial-scale=1.0"
+	/>
+	<link
+		rel="stylesheet"
+		href="./index.css"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0"
+	/>
+	<title>Demo</title>
+	<style>
+		@import url("https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap");
+
+		*,
+		*::after,
+		*::before {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--mobile: 36rem;
+			--tablet: 48rem;
+			--laptop: 62rem;
+			--desktop: 75rem;
+			--major-bg-color: #ffffff;
+			--minor-bg-color: #efbf3f;
+			--minor-bg-color: #3f3f3f;
+			--major-text-color: #0f0f0f;
+			--minor-text-color: #ffffff;
+			--major-link-color: #3f6fff;
+			--minor-link-color: #2faf9f;
+			--strike-duration: 0.5s;
+			--timing: cubic-bezier(0.75, -0.5, 0.25, 1.5);
+			---1: #ff4f4f;
+			---2: #ff8f2f;
+			---3: #efbf3f;
+			---4: #2faf9f;
+			---5: #3f6fff;
+			---6: #6f3fff;
+			---7: #9f2fff;
+			color: var(--major-text-color);
+			font-family: "Zen Maru Gothic", sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+		}
+
+		@media (prefer-color-scheme: dark) {}
+
+		/* ! Anchor */
+		a {
+			border-bottom: 0.0625rem solid currentColor;
+			color: var(--major-link-color);
+			text-decoration: none;
+
+			&:empty::after {
+				content: attr(href);
+			}
+
+			&:hover {
+				color: var(--minor-link-color);
+			}
+		}
+
+		body {
+			margin-top: 5rem;
+		}
+
+		/* ! Button */
+		button,
+		[role="button"],
+		[type="button"],
+		[type="submit"] {
+			display: inline-block;
+			border: none;
+			border-radius: 1rem;
+			color: inherit;
+			font-family: inherit;
+			font-size: inherit;
+			line-height: inherit;
+			padding: 0.5rem 1rem;
+			cursor: pointer;
+
+			&.constructive {
+				background-color: var(---5);
+			}
+		}
+
+		.material-symbols-rounded {
+			font-size: inherit !important;
+			line-height: inherit !important;
+			vertical-align: middle;
+		}
+
+		/* ! Heading */
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-bottom: 1rem;
+		}
+
+		p:not(:last-child) {
+			margin-bottom: 1rem;
+		}
+
+		/* ! Strikethrough */
+		s {
+			display: inline-block;
+			position: relative;
+			text-decoration: none;
+
+			&::after {
+				content: "";
+				height: 0.25em;
+				position: absolute;
+				inset: 0;
+				background-color: var(---1);
+				border-radius: 0.5em;
+				margin: auto 0;
+				transform: scaleX(1);
+				transform-origin: left;
+				transition: transform var(--strike-duration) var(--timing);
+			}
+
+			&:hover::after {
+				transform: scaleX(0);
+				transform-origin: right;
+			}
+		}
+
+		.major-text-color {
+			color: var(--major-text-color);
+		}
+
+		.minor-text-color {
+			color: var(--minor-text-color);
+		}
+
+		.box {
+			padding: 1rem;
+		}
+
+		.container {
+			max-width: 75rem;
+			margin: 0 auto;
+			padding: 1rem;
+		}
+
+		.wrapper {
+			/* FALLBACK */
+			display: table;
+			display: contents;
+		}
+
+		.snackbar {
+			:active+& {
+				width: 100%;
+				max-width: 25em;
+				display: block;
+				position: fixed;
+				inset: auto auto 0 50%;
+				height: auto;
+				background-color: #00c896;
+				border: none;
+				border-radius: 0.390625em;
+				font-size: 0.8em;
+				line-height: 1.75;
+				color: #fff;
+				text-align: center;
+				margin: 0;
+				padding: 0.9375em 1.25em;
+				z-index: -999;
+				transform: translate(-50%, 100%);
+				animation-name: prompt;
+				animation-duration: 5s;
+				animation-iteration-count: 1;
+				animation-timing-function: cubic-bezier(0.75, -0.5, 0.25, 1.5);
+				animation-direction: alternate;
+			}
+		}
+
+		@keyframes popup {
+			0% {
+				bottom: 0;
+				z-index: 999;
+				transform: translate(-50%, 100%);
+			}
+
+			5% {
+				bottom: 5%;
+				transform: translate(-50%, 0%);
+			}
+
+			95% {
+				top: auto;
+				bottom: 5%;
+				transform: translate(-50%, 0%);
+			}
+
+			100% {
+				bottom: 0;
+				z-index: 999;
+				transform: translate(-50%, 100%);
+			}
+		}
+
+		.bookmark {}
+
+		.centered-text {
+			text-align: center;
+		}
+
+		.mockup {
+			display: inline;
+			background-color: currentColor;
+			user-select: none;
+		}
+
+		/* ! Navigation Bar */
+		.navbar {
+			--navbar-transition-duration: 0.5s;
+			position: fixed;
+			inset: 0 0 auto 0;
+			transition-duration: var(--navbar-transition-duration);
+
+			&.-hidden {
+				background-color: #ffffff;
+				transform: translateY(-100%);
+			}
+
+			menu {
+				width: 0;
+				height: 0;
+				position: absolute;
+				inset: 0;
+				font-size: 0;
+				margin: auto;
+				padding: 0;
+
+				&::before {
+					content: "";
+					width: 100vw;
+					height: 100vh;
+					position: absolute;
+					inset: 0 auto 0 50%;
+					background-color: var(--minor-link-color);
+					border-radius: 50%;
+					margin: auto;
+					transform: scale(0) translateX(-50%);
+					transition-duration: var(--navbar-transition-duration);
+					will-change: transform;
+				}
+			}
+
+			:checked+menu::before {
+				transform: scale(100);
+			}
+
+			label {
+				--icon-size: 2rem;
+				--icon-stroke: 0.25rem;
+				width: var(--icon-size);
+				height: var(--icon-size);
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+				align-items: center;
+				position: absolute;
+				inset: 0;
+				margin: auto;
+				cursor: pointer;
+
+				&::after,
+				&::before {
+					content: "";
+					width: 80%;
+					height: var(--icon-stroke);
+					display: block;
+					position: relative;
+					inset: 0 auto;
+					background-color: var(--major-text-color);
+					border-radius: 0.125rem;
+					transition-duration: var(--navbar-transition-duration);
+					transition-timing-function: cubic-bezier(0.75, -0.5, 0.25, 1.5);
+				}
+			}
+
+			:checked~label {
+				&::after {
+					top: calc(var(--icon-size) / -4 - var(--icon-stroke) / -2);
+					transform: rotate(-0.625turn);
+				}
+
+				&::before {
+					top: calc(var(--icon-size) / 4 - var(--icon-stroke) / 2);
+					transform: rotate(0.625turn);
+				}
+			}
+		}
+
+		.accordion {
+			div {
+				max-height: 0;
+				overflow-y: hidden;
+				transition: max-height 0.5s;
+			}
+
+			:focus+div {
+				max-height: 100%;
+			}
+		}
+
+		.reversible {
+			perspective: 62.5rem;
+		}
+
+		.flexbox {
+			display: flex;
+			flex-wrap: wrap;
+
+			/* justify-content: space-between; */
+			/* align-items: center; */
+			&>* {
+				flex: 1 1 var(--mobile-s);
+			}
+		}
+
+		.flexbox.\+vertical {
+			flex-direction: column;
+		}
+
+		.\+horizontal {
+			font-size: 0;
+			padding: 2rem;
+		}
+
+		.\+horizontal li {
+			display: inline-block;
+			font-size: 1rem;
+		}
+
+		.\+horizontal li+li::before {
+			content: "";
+			margin: 0 1rem;
+		}
+
+		.w\=50\% {
+			width: 50%;
+		}
+
+		.h\=100\% {
+			height: 100%;
+		}
+
+		/* ! Switch */
+		[id^="switch:"] {
+			display: none;
+		}
+
+		@media only screen and (max-width: 37.5rem) {}
+
+		@media only screen and (min-width: 37.5rem) {}
+
+		@media only screen and (min-width: 48rem) {}
+
+		@media only screen and (min-width: 62rem) {}
+
+		.frosted {
+			backdrop-filter: brightness(0.75) blur(0.25rem);
+			border-radius: 1rem;
+		}
+
+		.hero {
+			display: flex;
+			align-items: center;
+			background-image: var(--hero);
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+			border-bottom-left-radius: 5rem;
+			height: 30rem;
+
+			&::after {
+				content: "";
+				width: 25%;
+			}
+		}
+
+		@media only screen and (min-width: 75rem) {
+			.hero {
+				height: 50rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<nav
+			id="navbar"
+			class="navbar"
+		>
+			<div class="container flexbox">
+				<div>
+					<img
+						src="./images/Logo.svg"
+						alt="Logo"
+					/>
+				</div>
+				<div style="width: 2rem; height: 2rem; position: relative">
+					<input
+						type="checkbox"
+						id="switch:navbar"
+					/>
+					<menu class="+horizontal">
+						<li><a href="#">Home</a></li>
+						<li><a href="#">Pages</a></li>
+						<li><a href="#">Services</a></li>
+						<li><a href="#">Project</a></li>
+						<li><a href="#">Blog</a></li>
+						<li><a href="#">Contact</a></li>
+						<li><i class="material-symbols-rounded">search</i></li>
+					</menu>
+					<label for="switch:navbar"></label>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<!-- https://www.pixelkicks.co.uk/xpress/the-importance-of-creating-a-good-git-commit/ -->
+		<!-- https://unsplash.com/photos/XlGwDBZh_mM -->
+		<!-- https://unsplash.com/photos/k6CwSTSuOaw -->
+		<!-- https://unsplash.com/photos/FD8CGwuSB2Y -->
+		<!-- https://unsplash.com/photos/HaP28Y3ZGSg -->
+		<!-- https://unsplash.com/photos/4ULRZ_MNdm0 -->
+		<!-- https://unsplash.com/photos/_UNrCdQjGTU -->
+		<!-- https://unsplash.com/photos/hQGSOZ5hF2w -->
+		<!-- https://unsplash.com/photos/y8pxowXGKTE -->
+		<!-- https://unsplash.com/photos/Mthynno7LOA -->
+		<!-- https://unsplash.com/photos/GDz5SJ3fuAQ -->
+		<!-- https://unsplash.com/photos/qY86VoxDqO8 -->
+		<!-- https://unsplash.com/photos/80DAbtNfh4k -->
+		<!-- https://unsplash.com/photos/onWBManBScA -->
+		<!--  -->
+		<section
+			class="hero"
+			style="--hero: url(https://images.unsplash.com/photo-1627141440602-e9c1e5fd2fbf?w=1920)"
+		>
+			<div class="container frosted minor-text-color">
+				<h1>Tell Your Story, Realize Your Dream Home</h1>
+				<p>We're more than just interior designers, we're storytellers. We craft spaces that reflect your unique personality and bring your dreams to life.</p>
+				<button
+					type="button"
+					class="constructive"
+				>Get Started
+					<i class="material-symbols-rounded">arrow_forward</i>
+				</button>
+			</div>
+		</section>
+
+		<section
+			class="container flexbox"
+			style="text-align: center"
+		>
+			<div class="box">
+				<h2>Innovative</h2>
+				<p>We don't just follow trends, we create them. Our designs are inspired by your unique vision and personality, resulting in spaces that are both beautiful and truly yours.</p>
+				<a href="#">
+					<span>Read More</span>
+					<i class="material-symbols-rounded">arrow_forward</i>
+				</a>
+			</div>
+			<div class="box">
+				<h2>Proficient</h2>
+				<p>We don't just translate your dreams, we elevate them. Our years of experience and keen eye for design translate your aspirations into spaces that inspire and delight.</p>
+				<a href="#">
+					<span>Read More</span>
+					<i class="material-symbols-rounded">arrow_forward</i>
+				</a>
+			</div>
+			<div class="box">
+				<h2>Reliable</h2>
+				<p>We understand the importance of trust and transparency. Our experienced designers work closely with you every step of the way, ensuring your project stays on time and on budget.</p>
+				<a href="#">
+					<span>Read More</span>
+					<i class="material-symbols-rounded">arrow_forward</i>
+				</a>
+			</div>
+		</section>
+
+		<section class="container">
+			<div>
+				<h1>We Create The Art Of Stylish Living Stylishly</h1>
+				<p>It is a long established fact that a reader will be distracted by the of readable content of a page when lookings at its layouts the points of using that it has a more-or-less normal.</p>
+				<div>
+					<div><i class="material-symbols-rounded">call</i></div>
+					<div>
+						<b>012345678</b>
+						<span>Call Us Anytime</span>
+					</div>
+				</div>
+				<div>
+					<button>
+						<span>Get-Free-Estimate</span>
+						<i class="material-symbols-rounded">arrow_forward</i>
+					</button>
+				</div>
+			</div>
+			<div></div>
+		</section>
+
+		<section class="container">
+			<h2>What the Prople Thinks About Us</h2>
+			<div>
+				<div>
+					<div><img
+							src=""
+							alt=""
+						/></div>
+					<div>
+						<div>John Smith</div>
+						<div>Tainan City, Taiwan</div>
+					</div>
+					<p>We were so happy with the work that [公司名稱] did on our home. The designers were incredibly creative and professional, and they really took the time to understand our needs. We would definitely recommend them to anyone looking for a top-notch interior design company.</p>
+				</div>
+				<div>
+					<div><img
+							src=""
+							alt=""
+						/></div>
+					<div>
+						<div>Jane Doe</div>
+						<div>Taipei City, Taiwan</div>
+					</div>
+					<p>[公司名稱] was a pleasure to work with from start to finish. They were always responsive to our questions and concerns, and they went above and beyond to make sure that we were happy with the final product. We love our new home, and we couldn't have done it without [公司名稱].</p>
+				</div>
+				<div>
+					<div><img
+							src=""
+							alt=""
+						/></div>
+					<div>
+						<div>David Chen</div>
+						<div>Kaohsiung City, Taiwan</div>
+					</div>
+					<p>[公司名稱] is the best interior design company in Taiwan. They are professional, creative, and affordable. They helped us to create the home of our dreams, and we are so grateful for their help.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="container">
+			<img
+				src=""
+				alt=""
+			/><img
+				src=""
+				alt=""
+			/><img
+				src=""
+				alt=""
+			/><img
+				src=""
+				alt=""
+			/><img
+				src=""
+				alt=""
+			/>
+		</section>
+
+		<section class="container">
+			<h2>Follow Our Projects</h2>
+			<p>It is a long established fact that a reader will be distracted by the of readable content of page lookings at its layouts points.</p>
+			<div>
+				<div>
+					<div></div>
+					<div>
+						<div>
+							<div>Modern Kitchan</div>
+							<div>Decor / Artchitecture</div>
+						</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+				<div>
+					<div></div>
+					<div>
+						<div>
+							<div>Modern Kitchan</div>
+							<div>Decor / Artchitecture</div>
+						</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+				<div>
+					<div></div>
+					<div>
+						<div>
+							<div>Modern Kitchan</div>
+							<div>Decor / Artchitecture</div>
+						</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+				<div>
+					<div></div>
+					<div>
+						<div>
+							<div>Modern Kitchan</div>
+							<div>Decor / Artchitecture</div>
+						</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="container">
+			<div>
+				<div>12</div>
+				<div>Years Of Experiance</div>
+			</div>
+			<div>
+				<div>85</div>
+				<div>Success Project</div>
+			</div>
+			<div>
+				<div>15</div>
+				<div>Active Project</div>
+			</div>
+			<div>
+				<div>95</div>
+				<div>Happy CUstomers</div>
+			</div>
+		</section>
+
+		<section class="container">
+			<h2>Articles & News</h2>
+			<p>It is a long established fact that a reader will be distracted by the of readable content of a page when lookings at its layouts the points of using.</p>
+			<div>
+				<div>
+					<div>Kitchan Design</div>
+					<h2>Let’s Get Solution For Building Construction Work</h2>
+					<div>
+						<div>26 December,2022</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+				<div>
+					<div>Living Design</div>
+					<h2>Low Cost Latest Invented Interior Designing Ideas.</h2>
+					<div>
+						<div>22 December,2022</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+				<div>
+					<div>Interior Design</div>
+					<h2>Best For Any Office & Business Interior Solution</h2>
+					<div>
+						<div>25 December,2022</div>
+						<div><i class="material-symbols-rounded">navigate_next</i></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<style>
+			section.cta {
+				background-color: var(--minor-bg-color);
+				color: var(--minor-text-color);
+				text-align: center;
+				padding: 2rem;
+			}
+
+			@media only screen and (min-width: 75rem) {
+				section.cta {
+					border-radius: 2.5rem;
+				}
+			}
+		</style>
+		<section class="container cta">
+			<h2>Wanna join the interno?</h2>
+			<p>It is a long established fact will be distracted.</p>
+			<div>
+				<button type="button">
+					<span>Contact With Us</span>
+					<i class="material-symbols-rounded">arrow_forward</i>
+				</button>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<nav class="container">
+			<div></div>
+			<section>
+				<h1>Pages</h1>
+				<ul>
+					<li>About Us</li>
+					<li>Our Projects</li>
+					<li>Our Team</li>
+					<li>Contact Us</li>
+					<li>Services</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Services</h1>
+				<ul>
+					<li>Kitchan</li>
+					<li>Living Area</li>
+					<li>Bathroom</li>
+					<li>Dinning Hall</li>
+					<li>Bedroom</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Contact</h1>
+				<address>
+					<div>55 East Birchwood Ave.Brooklyn,New York 11201</div>
+					<div>contact@interno.com</div>
+					<div>(123) 456 - 7890</div>
+				</address>
+			</section>
+		</nav>
+
+		<style>
+			.copyright {
+				text-align: center;
+			}
+		</style>
+		<div class="container copyright">Copyright &#169; Felix</div>
+	</footer>
+
+	<script>
+		let scrollY = window.scrollY;
+		const nav = document.getElementById("navbar");
+
+		window.addEventListener("scroll", scroll);
+
+		function scroll() {
+			if (scrollY < window.scrollY && window.scrollY > nav.offsetHeight) {
+				nav.classList.add("-hidden");
+			} else {
+				nav.classList.remove("-hidden");
+			}
+
+			scrollY = window.scrollY;
+		}
+
+		function reset(element) {
+			element.className.split("");
+		}
+	</script>
+</body>
+
+</html>
